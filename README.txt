@@ -1,0 +1,1 @@
+While an android emulator is running, type "npm start" in the terminal
