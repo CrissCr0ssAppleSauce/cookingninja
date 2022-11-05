@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "266144956789",
+    "project_id": "cookingninja-d5366",
+    "storage_bucket": "cookingninja-d5366.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:266144956789:android:9312052798e8d003ba133c",
+        "android_client_info": {
+          "package_name": "host.exp.exponent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "266144956789-jdann6cb4oniu0hjjfi7i15kn922789f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhcgenENGC1Sg1gAAp1sHIvO5MSowMsyk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "266144956789-jdann6cb4oniu0hjjfi7i15kn922789f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

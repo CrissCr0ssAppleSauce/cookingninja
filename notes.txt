@@ -1,0 +1,10 @@
+https://www.youtube.com/watch?v=AkEnidfZnCU
+7:36:00
+
+registering app - host.exp.exponent
+
+parent tag has nested tags as an argument called {children}
+
+add google-services.json to app.json to be recognized
+
+https://firebase.google.com/docs/auth/web/start <- firebase authentication examples
