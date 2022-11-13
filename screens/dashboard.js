@@ -10,7 +10,7 @@ export default function Dashboard({navigation}){
             <Text>Welcome, {auth.currentUser.displayName}</Text>
             <Button title='Cook!'/>
             <Button title='View Recipes'/>
-            {/*<Button title='Add Recipes' onPress={() =>{navigation.navigate('AddRecipe')}}/> */}
+            <Button title='Add Recipes' onPress={() =>{navigation.navigate('AddRecipe')}}/>
             <Button onPress={()=>signOut(auth).then(()=>{navigation.replace('Login');})} title='sign out'/>
         </View>
     )
