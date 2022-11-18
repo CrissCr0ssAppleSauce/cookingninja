@@ -8,3 +8,14 @@ parent tag has nested tags as an argument called {children}
 add google-services.json to app.json to be recognized
 
 https://firebase.google.com/docs/auth/web/start <- firebase authentication examples
+
+find array element by key
+-------------------------
+let arr = [
+    { name:"string 1", value:"this", other: "that" },
+    { name:"string 2", value:"this", other: "that" }
+];
+
+let obj = arr.find(o => o.name === 'string 1');
+
+console.log(obj);
