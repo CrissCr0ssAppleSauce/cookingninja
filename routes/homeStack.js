@@ -5,6 +5,7 @@ import Login from '../screens/login'
 import Signup from '../screens/signup'
 import Dashboard from '../screens/dashboard'
 import AddRecipe from '../screens/addRecipe'
+import RecipeSelect from "../screens/recipeSelect";
 
 const Stack = createNativeStackNavigator();
 
@@ -15,6 +16,7 @@ export default function StackNavigator(){
                 <Stack.Screen name="Signup" component={Signup}/></>
                 <><Stack.Screen name="Dashboard" component={Dashboard}/></>
                 <Stack.Screen name="AddRecipe" component={AddRecipe}/>
+                <Stack.Screen name="RecipeSelect" component={RecipeSelect}/>
  
         </Stack.Navigator>
     )

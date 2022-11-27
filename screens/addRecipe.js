@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {StyleSheet, View, Text, TextInput,FlatList, Button, ScrollView, InputAccessoryView} from 'react-native'
-import RecipeStep from '../components/recipeStep.js';
 import {db, auth} from '../firebase.js'
+import { collection, addDoc } from "firebase/firestore";
 
 export default function AddRecipe({navigation}){
     const [steps, setSteps] = useState([]);
@@ -9,10 +9,15 @@ export default function AddRecipe({navigation}){
 
     var stepNumber = 1;
 
-    const submitHandler = () =>{
+    // save recipe to the database
+    const submitHandler = async () =>{
         const myRecipe = {name: name, steps: steps, user: auth.currentUser.email}
-        db.ref("recipe").set(myRecipe).catch(alert);
+        //db.ref("recipe").set(myRecipe).catch(alert);
+        const docRef = await addDoc(collection(db, "recipes"), myRecipe);
+        console.log("Recipe added with ID: ", docRef.id);
+        navigation.navigate('Dashboard');
     }
+    // adds an additional recipe step
     const addHandler = ()=>{
         let _steps = [...steps];
         _steps.push({key: stepNumber, duration: '', description:''});
@@ -20,17 +25,20 @@ export default function AddRecipe({navigation}){
         stepNumber += 1;
     }
 
+    // field setters
     titleHandler = (text) =>{
         setName(text);
     }
     descInputHandler = (text, key) =>{
         let _steps = [...steps];
         _steps[key].description = text;
+        console.log(_steps[key]);
         setSteps(_steps);
     }
     durInputHandler = (text, key) =>{
         let _steps = [...steps];
         _steps[key].duration = text;
+        console.log(_steps[key]);
         setSteps(_steps);
     }
 
@@ -46,7 +54,7 @@ export default function AddRecipe({navigation}){
                         <TextInput placeholder={"Enter Description"} value={step.description} 
                             onChangeText={(text)=>descInputHandler(text,key)}
                         />
-                        <TextInput placeholder={"Enter Duration"} value={step.description} 
+                        <TextInput placeholder={"Enter Duration"} value={step.duration} 
                             onChangeText={(text)=>durInputHandler(text,key)}
                         />
                     </View>

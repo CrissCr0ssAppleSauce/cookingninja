@@ -8,8 +8,8 @@ export default function Dashboard({navigation}){
     return(
         <View>
             <Text>Welcome, {auth.currentUser.displayName}</Text>
-            <Button title='Cook!'/>
-            <Button title='View Recipes'/>
+            <Button title='Cook!' onPress={() =>{navigation.navigate('RecipeSelect')}}/>
+            <Button title='View Recipes (not implemented)'/>
             <Button title='Add Recipes' onPress={() =>{navigation.navigate('AddRecipe')}}/>
             <Button onPress={()=>signOut(auth).then(()=>{navigation.replace('Login');})} title='sign out'/>
         </View>

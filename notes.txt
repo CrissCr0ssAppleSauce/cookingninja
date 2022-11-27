@@ -19,3 +19,5 @@ let arr = [
 let obj = arr.find(o => o.name === 'string 1');
 
 console.log(obj);
+
+pass [] as second object in useEffect for it to only activate once
