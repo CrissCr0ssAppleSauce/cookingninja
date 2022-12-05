@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
-import {StyleSheet, View, Text, TextInput, Button} from 'react-native'
+import {StyleSheet, View, Text, TextInput, Button, Image} from 'react-native'
 import {getAuth, createUserWithEmailAndPassword, updateProfile} from 'firebase/auth'
 import {auth} from '../firebase'
+import {globalStyles} from '../styles/globalStyles.js'
 
 export default function Dashboard({navigation}){
     const [email, setEmail] = useState(null);
@@ -30,15 +31,26 @@ export default function Dashboard({navigation}){
     }
     return (
         <View>
+            <View style={styles.container}>
+                <Image
+                    style={globalStyles.icon}
+                    source={require('../images/CookingNinja_Icon.png')}
+                />
+                <Text style={{fontSize: 30}}>Cooking Ninja</Text>
+                <Text style={{fontSize: 30}}>Registration</Text>
+            </View>
             <TextInput
+                style={styles.textStyle}
                 placeholder='email'
                 onChangeText={changeHandlerEmail}
             />
             <TextInput
+                style={styles.textStyle}
                 placeholder='username'
                 onChangeText={changeHandlerUser}
             />
             <TextInput
+                style={styles.textStyle}
                 placeholder='password'
                 onChangeText={changeHandlerPass}
             />
@@ -49,3 +61,19 @@ export default function Dashboard({navigation}){
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    container:{
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingTop:20,
+    },
+
+    textStyle:{
+        height: 40,
+    },
+
+    buttonStyle:{
+        paddingTop: 40,
+    }
+})

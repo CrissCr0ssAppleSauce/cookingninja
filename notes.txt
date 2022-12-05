@@ -21,3 +21,19 @@ let obj = arr.find(o => o.name === 'string 1');
 console.log(obj);
 
 pass [] as second object in useEffect for it to only activate once
+
+------------------------------
+
+TODO
+
+complete bundleSelect.js
+add "attend" boolean to each step
+add cooking functionality
+
+
+
+Cooking algorithm
+------------------
+1. compare the last elements of each step array
+2. durProcessed = (duration of all steps in stack) + (duration of current step)
+3. Recipe with lowest durProcessed score is pushed into the stack
