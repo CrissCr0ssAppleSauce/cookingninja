@@ -1,13 +1,17 @@
 import React, {useState, useEffect} from 'react'
-import {View, Text, FlatList, Button, ScrollView, TouchableOpacity} from 'react-native'
+import {StyleSheet, View, Text, FlatList, Button, ScrollView, TouchableOpacity} from 'react-native'
 import { collection, getDocs, query, addDoc} from "firebase/firestore";
 import {db, auth} from '../firebase.js'
+import Timer from '../components/timer.js'
 
 export default function Cook({navigation, route}){
 
     const [bundle, setBundle] = useState({});
     const [recipes, setRecipes] = useState([]);
     const [optimizedSteps, setOptimizedSteps] = useState([]);
+    const [retrieved, setRetrieved] = useState(false);
+
+    let intervalID = 0;
 
     //Organize the recipe steps
     useEffect(()=>{
@@ -19,6 +23,7 @@ export default function Cook({navigation, route}){
             _recipes.push(recipeList[i]);
         }
         setRecipes(_recipes);
+        //return () =>clearInterval(id.current);
     },[])
 
 
@@ -53,7 +58,7 @@ export default function Cook({navigation, route}){
 
             // push obtained score to beginning of stack
             console.log(recipeScore);
-            _optimizedSteps.unshift(steps[bestStep][recipeIndex[bestStep]]);
+            _optimizedSteps.unshift({data: steps[bestStep][recipeIndex[bestStep]], pressed: false});
             recipeScore[bestStep] += steps[bestStep][recipeIndex[bestStep]].duration;
             recipeIndex[bestStep] -= 1;
 
@@ -70,9 +75,24 @@ export default function Cook({navigation, route}){
             else
                 break;
         }
-
         setOptimizedSteps(_optimizedSteps);
+        setRetrieved(true);
         console.log(_optimizedSteps);
+    }
+
+    const optimizedPressHandler = (index) =>{
+        // if not yet pressed, start the timer
+        var _optimizedSteps = [...optimizedSteps];
+        if(_optimizedSteps[index].pressed == false){
+            _optimizedSteps[index].pressed = true;
+            setOptimizedSteps(_optimizedSteps);
+        }
+        // if already pressed, stop the timer and remove the step from the list
+        else{
+            //var _optimizedSteps = [...optimizedSteps];
+            _optimizedSteps.splice(index, 1);
+            setOptimizedSteps(_optimizedSteps);
+        }  
     }
 
     return optimizedSteps.length == 0
@@ -85,11 +105,28 @@ export default function Cook({navigation, route}){
         <View>
             <Text>Cooking: {bundle.name}</Text>
             {/*display up to the next 3 steps*/
-            optimizedSteps.map((step, key)=>(
-                <View key={key}>
-                    <Text>{step.description}</Text>
+            optimizedSteps.map((step, index)=>(
+                <View key={index}>
+                    <TouchableOpacity style={styles.step} onPress={()=>{optimizedPressHandler(index)}}>
+                    <Timer 
+                        duration={step.data.duration} 
+                        isPressed={step.pressed}
+                        description={step.data.description}
+                    />
+                    <Text>{step.data.description}</Text>
+                    </TouchableOpacity>
                 </View>
             ))}
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    step:{
+        padding:16,
+        marginTop:16,
+        borderColor: 'black',
+        borderWidth:1,
+        borderRadius: 10,
+    }
+})

@@ -8,7 +8,7 @@ export default function Dashboard({navigation}){
     const [user, setUser] = useState(null);
     return(
         <View>
-            <Text>Welcome, {auth.currentUser.displayName}</Text>
+            <Text style={{fontSize:30,paddingBottom:30}}>Welcome, {auth.currentUser.displayName}</Text>
             <Button title='Cook!'onPress={() =>{navigation.navigate('BundleSelect')}}/>
             <Button title='Create Recipe Bundle' onPress={() =>{navigation.navigate('RecipeSelect')}}/>
             <Button title='View Recipes'/>

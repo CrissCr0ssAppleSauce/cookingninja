@@ -20,4 +20,17 @@ export const globalStyles = StyleSheet.create({
         borderWidth:1,
         borderRadius: 10,
     },
+
+    customButton:{
+        height: 30,
+        marginHorizontal: 10,
+        backgroundColor: "#5d57ff",
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    buttonText:{
+        textTransform: "uppercase",
+        color: "#fff",
+        fontSize: 18,
+    }
 });
